@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'  # Specify the distribution
+          distribution: 'temurin'
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3
@@ -29,9 +29,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: List files for debug
+        run: ls -la # List files to ensure gradlew is there
+
       - name: Make gradlew executable
         run: |
-          chmod +x gradlew
+          chmod +x ./gradlew
+          ls -l ./gradlew  # Verify the permission change
 
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m
