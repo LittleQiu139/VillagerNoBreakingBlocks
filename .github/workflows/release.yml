@@ -40,13 +40,12 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m
 
-
       - name: Create or update release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
           files: |
-            build/libs/VillagerNoBreakingBlocks.jar
+            build/libs/VillagerNoBreakingBlocks.jar  # Make sure this path is correct
           body: |
             This is an automated release for version ${{ github.ref_name }}.
           token: ${{ secrets.GITHUB_TOKEN }}
