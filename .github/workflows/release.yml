@@ -33,7 +33,10 @@ jobs:
         run: rm -rf ~/.gradle/caches
 
       - name: Make gradlew executable
-        run: chmod +x gradlew
+        run: |
+          ls -l gradlew
+          chmod +x gradlew
+          ls -l gradlew
 
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m
