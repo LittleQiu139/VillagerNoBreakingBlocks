@@ -29,9 +29,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: List all files for debugging
-        run: ls -la # List all files to verify gradlew exists
-
       - name: Make gradlew executable
         run: |
           chmod +x ./gradlew
@@ -40,12 +37,15 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m
 
+      - name: List build/libs directory
+        run: ls -la build/libs  # Check the output directory for the JAR file
+
       - name: Create or update release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}  # Ensure the tag exists or is valid
           files: |
-            build/libs/VillagerNoBreakingBlocks.jar  # Make sure this path is correct
+            build/libs/VillagerNoBreakingBlocks.jar  # Update this if needed
           body: |
             This is an automated release for version ${{ github.ref_name }}.
           token: ${{ secrets.GITHUB_TOKEN }}
