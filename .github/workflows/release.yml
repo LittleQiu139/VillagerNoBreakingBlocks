@@ -29,14 +29,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Clean Gradle cache
-        run: rm -rf ~/.gradle/caches
-
       - name: Make gradlew executable
         run: |
-          ls -l gradlew
           chmod +x gradlew
-          ls -l gradlew
 
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m
@@ -46,7 +41,7 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           files: |
-            build/libs/VillagerNoBreakingBlocks.jar
+            build/libs/VillagerNoBreakingBlocks.jar  # Ensure this is the correct path
           body: |
             This is an automated release for version ${{ github.ref_name }}.
           token: ${{ secrets.GITHUB_TOKEN }}
