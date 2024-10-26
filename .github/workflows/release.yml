@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Ensure token has correct permissions
 
     steps:
       - name: Checkout code
@@ -43,9 +45,9 @@ jobs:
       - name: Create or update release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}  # Ensure the tag exists or is valid
+          tag_name: v1.0.0  # Ensure you are using a valid tag
           files: |
-            build/libs/VillagerNoBreakingBlocks.jar  # Update this if needed
+            build/libs/VillagerNoBreakingBlocks.jar  # Update this path based on the List step
           body: |
-            This is an automated release for version ${{ github.ref_name }}.
+            This is an automated release for version v1.0.0.
           token: ${{ secrets.GITHUB_TOKEN }}
