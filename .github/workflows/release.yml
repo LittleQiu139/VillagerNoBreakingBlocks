@@ -32,7 +32,7 @@ jobs:
       - name: Clean Gradle cache
         run: rm -rf ~/.gradle/caches
 
-      - name: Download Gradle Wrapper
+      - name: Set up Gradle Wrapper
         run: |
           if [ ! -f gradlew ]; then
             wget https://services.gradle.org/distributions/gradle-7.4.2-bin.zip -O gradle.zip
