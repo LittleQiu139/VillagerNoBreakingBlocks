@@ -29,11 +29,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
       - name: Build with Gradle
-        run: ./gradlew build
+        run: gradle build
 
       - name: Create or update release
         uses: softprops/action-gh-release@v1
