@@ -29,13 +29,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Install Gradle
+      - name: Clean Gradle cache
+        run: rm -rf ~/.gradle/caches
+
+      - name: Download Gradle Wrapper
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gradle
+          if [ ! -f gradlew ]; then
+            wget https://services.gradle.org/distributions/gradle-7.4.2-bin.zip -O gradle.zip
+            unzip gradle.zip
+            mv gradle-7.4.2/bin/gradlew .
+            rm -rf gradle-7.4.2 gradle.zip
+            chmod +x gradlew
+          fi
 
       - name: Build with Gradle
-        run: gradle build
+        run: ./gradlew build --stacktrace -Dorg.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m
 
       - name: Create or update release
         uses: softprops/action-gh-release@v1
