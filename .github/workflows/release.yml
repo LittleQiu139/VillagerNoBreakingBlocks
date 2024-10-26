@@ -18,15 +18,25 @@ jobs:
       with:
         java-version: '1.8'
 
-    - name: Build with Maven
-      run: mvn clean package
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**.gradle*', '**/build.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build with Gradle
+      run: ./gradlew build
 
     - name: Create or update release
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ github.ref_name }}
         files: |
-          target/VillagerNoBreakingBlocks.jar
+          build/libs/VillagerNoBreakingBlocks.jar
         body: |
           This is an automated release for version ${{ github.ref_name }}.
         token: ${{ secrets.GITHUB_TOKEN }}
