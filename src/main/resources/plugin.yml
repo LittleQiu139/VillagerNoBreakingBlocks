@@ -1,0 +1,8 @@
+name: VillagerNoBreakingBlocks
+version: '${version}'
+main: org.example.spigot.villagernobreakingblocks.VillagerNoBreakingBlocks
+api-version: '1.20'
+commands:
+  vnb:
+    description: 用于管理村民破坏农作物的插件
+    usage: /vnb <reload|r>

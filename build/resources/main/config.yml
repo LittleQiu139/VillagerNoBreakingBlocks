@@ -1,0 +1,19 @@
+#写出你想要禁止村民破坏的方块id，用大写字母表示
+crops:
+  - WHEAT #小麦
+  - CARROTS #胡萝卜
+  - POTATOES #马铃薯
+  - BEETROOTS
+  - NETHER_WART
+  - SWEET_BERRY_BUSH
+  - COCOA
+  - MELON_STEM
+  - PUMPKIN_STEM
+  - SUGAR_CANE
+  - VINE
+  - LILY_PAD
+  - BAMBOO
+  - CRIMSON_FUNGUS
+  - WARPED_FUNGUS
+  - CRIMSON_ROOTS
+  - WARPED_ROOTS
