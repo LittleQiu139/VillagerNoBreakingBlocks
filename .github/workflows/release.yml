@@ -37,8 +37,9 @@ jobs:
           chmod +x ./gradlew
           ls -l ./gradlew  # Ensure the file is executable
 
-      - name: Run gradlew using bash (alternative execution)
-        run: bash ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m
+      - name: Build with Gradle
+        run: ./gradlew build --stacktrace --info -Dorg.gradle.jvmargs=-Xmx2048m
+
 
       - name: Create or update release
         uses: softprops/action-gh-release@v1
